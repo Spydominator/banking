@@ -1,0 +1,55 @@
+﻿@model MVCBank.CustomerBankList
+@{
+    ViewBag.Title = "Transfer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+    @using (Html.BeginForm("Transfer", "Simulator", new {  cust_id=Model.Name.cust_id, branch=Model.Bnk.b_branch_id, IBAN="IBAN",  amount="amount" }, FormMethod.Post))
+    {
+        <div class="form-horizontal">
+            <h4>Transfer</h4>
+            <hr />
+
+
+            <div class="form-group">
+                @Html.Label("IBAN", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("IBAN", null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "IBAN is required" })
+                    @Html.ValidationMessage("IBAN", "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBox("amount", null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "Amount is required", @type = "number", @min="0" })
+                    @Html.ValidationMessage("amount", "", new { @class = "text-danger" })
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="OK" class="btn btn-primary btn-sm" />
+                    @Html.ActionLink("Back", "Welcome", new { card_no = Model.Name.card_no, branch1 = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            </div>
+        </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+        if (@ViewBag.Message != null)
+        {
+            <script type="text/javascript">
+            $(function () {
+                swal("Transaction failed!","@ViewBag.Message", "error")
+            });
+            </script>
+        }
+    }
+
+               
+
+
+

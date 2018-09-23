@@ -1,0 +1,55 @@
+﻿@model MVCBank.Bank_Admin
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+
+@using (Html.BeginForm("Admin", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <form class="form-horizontal">
+            <h3> Manage customers</h3>
+            <div class="form-group">
+                @Html.Label("Username", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    @Html.TextBoxFor(m => m.b_admin_name, null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "Username is required" })
+                    @Html.ValidationMessageFor(m => m.b_admin_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+            @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.PasswordFor(m => m.b_admin_pin, new { @class = "form-control valid" })
+                @Html.ValidationMessageFor(m => m.b_admin_pin, "", new { @class = "error" })
+            </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Login" class="btn btn-primary btn-group-sm" />
+                </div>
+            </div>
+            </form>
+
+
+
+
+
+
+            </div>
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+            if (@ViewBag.Message != null)
+            {
+            <script type="text/javascript">
+            $(function () {
+                swal("Failed","@ViewBag.Message", "error")
+            });
+            </script>
+            }
+            }

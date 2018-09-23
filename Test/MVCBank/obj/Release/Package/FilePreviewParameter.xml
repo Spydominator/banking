@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="MVCBank123" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\l\.vochin\\documents\\visual\ studio\ 2017\\Projects\\Test\\MVCBank\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\l\.vochin\\documents\\visual\ studio\ 2017\\Projects\\Test\\MVCBank\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="MVCBank123/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\l\.vochin\\documents\\visual\ studio\ 2017\\Projects\\Test\\MVCBank\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="BankEntities-Web.config Connection String" description="" value="metadata=res://*/BankEntities.csdl|res://*/BankEntities.ssdl|res://*/BankEntities.msl;provider=System.Data.SqlClient;provider connection string='Data Source=tcp:disertatieserver.database.windows.net,1433;AttachDbFilename=&quot;C:\Users\l.vochin\Documents\Visual Studio 2017\Projects\Test\MVCBank\App_Data\Bank.mdf&quot;;Persist Security Info=False;User ID=Spydominator;Password=Empireatwar1024;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False'" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\l\.vochin\\documents\\visual\ studio\ 2017\\Projects\\Test\\MVCBank\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BankEntities']/@connectionString" />
+  </parameter>
+</parameters>

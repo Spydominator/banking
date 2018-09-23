@@ -1,0 +1,79 @@
+﻿@model MVCBank.CustomerBankList
+@{
+    ViewBag.Title = "Simulator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Simulator</h2>
+@using (Html.BeginForm("Simulator", "Home", FormMethod.Post))
+{
+    <div id="Login">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="3">
+                    Login
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Card number
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name.card_no)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Name.card_no, "", new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    PIN
+                </td>
+                <td>
+                    @Html.PasswordFor(m => m.Name.card_pin)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Name.card_pin, "", new { @class = "error" })
+                </td>
+            </tr>
+            <tr>
+                <td>Branch?</td>
+                @*<td>@Html.DropDownList("Branches",String.Empty)*@
+                <td>@Html.DropDownListFor(m => m.Bnk.b_branch_id, new SelectList(Model.BankList, "b_branch_id", "b_branch_name"))
+            </tr>
+            <tr>
+                <td>
+                    Remember Me
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+
+
+
+
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
+}
+

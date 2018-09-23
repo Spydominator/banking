@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    .jumbotron {
+        background-image: url(../../Technology-001.jpg);
+        background-size: 100% 100%;
+    }
+</style>
+<div class="jumbotron">
+    <h2></h2>
+    </br>
+    </br>
+    </br>
+    <p></p> 
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Transactions</h2>
+        <p>
+            For simulating ATM transactions please click here:
+        </p>
+        <p>@Html.ActionLink("ATM Simulator ", "Simulator", "Home", new { @class = "btn btn-primary" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>New customers</h2>
+        <p>For managing customers please click here:</p>
+        <p>@Html.ActionLink("Bank", "Admin", "Home", new { @class = "btn btn-primary" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>ATMs</h2>
+        <p>For managing ATMs please click here: </p>
+        <p>@Html.ActionLink("ATM", "ATM_A", "Home", new { @class = "btn btn-primary" })</p>
+    </div>
+</div>

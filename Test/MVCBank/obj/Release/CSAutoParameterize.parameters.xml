@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="BankEntities-Web.config Connection String" description="BankEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/BankEntities.csdl|res://*/BankEntities.ssdl|res://*/BankEntities.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\Bank.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\l\.vochin\\documents\\visual\ studio\ 2017\\Projects\\Test\\MVCBank\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BankEntities']/@connectionString" />
+  </parameter>
+</parameters>

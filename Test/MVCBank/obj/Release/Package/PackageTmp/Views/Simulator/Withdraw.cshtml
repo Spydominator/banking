@@ -1,0 +1,53 @@
+﻿@model MVCBank.CustomerBankList
+
+@{
+    ViewBag.Title = "Withdraw";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+
+@using (Html.BeginForm("Withdraw", "Simulator", new { cust_id = Model.Name.cust_id, branch = Model.Bnk.b_branch_id, balance = "balance",atm="ATM" }, FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <h4>Withdraw</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.Label("Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBox("balance", null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "Amount is required", @type = "number", @min = 0 })
+                @Html.ValidationMessage("balance", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+        @Html.Label("Select ATM", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.DropDownList("ATM", new SelectList(Model.ListATM, "a_branch_id", "a_branch_name"), htmlAttributes: new { @class = "btn btn-default dropdown-toggle" })
+
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="OK" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Back", "Welcome", new { card_no = Model.Name.card_no, branch1 = Model.Name.b_branch_id }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+            </div>
+        </div>
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+            if (@ViewBag.Message != null)
+            {
+            <script type="text/javascript">
+            $(function () {
+                  swal("Transaction failed!","@ViewBag.Message", "error")
+            });
+            </script>
+            }
+            }
+
+

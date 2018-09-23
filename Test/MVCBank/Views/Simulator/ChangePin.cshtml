@@ -1,0 +1,62 @@
+﻿@model MVCBank.CustomerBankList
+@{
+    ViewBag.Title = "ChangePin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+
+<h2>Change PIN</h2>
+@using (Html.BeginForm("ChangePin", "Simulator", new { cust_id = Model.Name.cust_id, oldpin = "oldpin", newpin = "newpin", confirmPin = "confirmpin", branch = Model.Bnk.b_branch_id }, FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <h4>Change PIN</h4>
+        <hr />
+
+
+        <div class="form-group">
+            @Html.Label("Old PIN", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Password("oldpin", null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "Old PIN is required", @pattern = "[0-9]*", @inputmode = "numeric", @minLength = "4", @maxLength="4" })
+                @Html.ValidationMessage("oldpin", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("New PIN",null, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Password("newpin",null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "New PIN is required", @pattern="[0-9]*", @inputmode = "numeric", @minLength = "4", @maxLength = "4" })
+                @Html.ValidationMessage("newpin", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Confirm new PIN", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Password("confirmpin", null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "Confirmation PIN is required", @pattern = "[0-9]*", @inputmode = "numeric", @minLength = "4", @maxLength = "4" })
+                @Html.ValidationMessage("confirmpin", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+
+                <input type="submit" value="OK" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Back", "Welcome", new { card_no = Model.Name.card_no, branch1 = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+
+            </div>
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+    if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                swal("Failed","@ViewBag.Message", "error")
+            });
+        </script>
+    }
+}

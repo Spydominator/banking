@@ -1,0 +1,99 @@
+﻿@model MVCBank.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalii</h2>
+
+<div>
+    <h4>Customers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cust_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Date of birth")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Phone")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Address")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cust_add)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("IBAN")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_c_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Account type")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.a_c_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Balance")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bal)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Card number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.card_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("PIN")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.card_pin)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Branch")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bank.b_branch_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cust_id }, new { @class = "btn btn-primary" }) 
+    @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-primary btn-sm" })
+</p>

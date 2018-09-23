@@ -1,0 +1,60 @@
+﻿@model IEnumerable<MVCBank.ATM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-group-sm" }) 
+    @Html.ActionLink("Search", "Search", null, new { @class = "btn btn-primary btn-group-sm" })
+</p>
+<table class="table table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayName("ATM Branch")
+        </th>
+        <th>
+            @Html.DisplayName("Admin Address")
+        </th>
+        <th>
+            @Html.DisplayName("ATM cash")
+        </th>
+        <th>
+            @Html.DisplayName("Admin name")
+        </th>
+        <th>
+            @Html.DisplayName("Bank branch")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.a_branch_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.a_branch_add)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.available_cash)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A_ATM.a_admin_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bank.b_branch_name)
+        </td>
+        <td>
+            <div class="btn-group btn-group-xs">
+                @Html.ActionLink("Edit", "Edit", new { id = item.a_branch_id}, new { @class = "btn btn-success" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = item.a_branch_id }, new { @class = "btn btn-danger" })
+                </div>
+</td>
+    </tr>
+}
+
+</table>

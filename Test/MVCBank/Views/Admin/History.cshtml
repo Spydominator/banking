@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MVCBank.Transaction>
+
+@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+<div class="form-horizontal">
+    <h4>History</h4>
+    <hr />
+
+    <table class="table table-bordered table-condensed ">
+        <tr>
+            <th>
+                @Html.DisplayName("IBAN")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("Credit")
+            </th>
+            <th>
+                @Html.DisplayName("Debit")
+            </th>
+            <th>
+                @Html.DisplayName("Total")
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.a_c_no)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.credit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.debit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.message)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    </div>
+    <div>
+        @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-primary btn-sm" })
+    </div>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<MVCBank.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="form-horizontal">
+        <h4>Home</h4>
+        <hr />
+
+
+        <p>
+            @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary btn-group-sm" }) 
+            @Html.ActionLink("Search", "Search", null, new { @class = "btn btn-primary btn-group-sm" })
+            @Html.ActionLink("Exit", "Logout", null, new { @class = "btn btn-primary btn-group-sm pull-right" })
+        </p>
+
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>
+                    @Html.DisplayName("Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Date")
+                </th>
+                <th>
+                    @Html.DisplayName("Phone")
+                </th>
+                <th>
+                    @Html.DisplayName("Address")
+                </th>
+                <th>
+                    @Html.DisplayName("IBAN")
+                </th>
+                <th>
+                    @Html.DisplayName("Account type")
+                </th>
+                <th>
+                    @Html.DisplayName("Balance")
+                </th>
+                <th>
+                    @Html.DisplayName("Card number")
+                </th>
+                <th>
+                    @Html.DisplayName("PIN")
+                </th>
+                <th>
+                    @Html.DisplayName("Branch")
+                </th>
+                <th>
+                </th>
+            </tr>
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    var active = item.Dob.ToShortDateString();
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cust_name)
+                        </td>
+                        <td>
+                            
+                            @Html.DisplayFor(modelItem => active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.contact_no)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cust_add)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.a_c_no)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.a_c_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.card_no)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.card_pin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bank.b_branch_name)
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-vertical btn-group-xs">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.cust_id }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Details", "Details", new { id = item.cust_id }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.cust_id }, new { @class = "btn btn-danger" })
+                                @Html.ActionLink("History","History", new {acc_no= item.a_c_no}, new {@class ="btn btn-info"})
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+
+            }
+        </table>
+
+    </div>
+        

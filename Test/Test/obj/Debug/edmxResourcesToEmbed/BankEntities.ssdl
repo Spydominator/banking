@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="A_ATM">
+    <Key>
+      <PropertyRef Name="a_admin_id" />
+    </Key>
+    <Property Name="a_admin_id" Type="int" Nullable="false" />
+    <Property Name="a_admin_name" Type="varchar" MaxLength="50" />
+    <Property Name="a_admin_pin" Type="varchar" MaxLength="50" />
+    <Property Name="a_admin_rights" Type="varchar" MaxLength="50" />
+    <Property Name="a_branch_id" Type="int" />
+  </EntityType>
+  <EntityType Name="ATM">
+    <Key>
+      <PropertyRef Name="a_branch_id" />
+    </Key>
+    <Property Name="a_branch_id" Type="int" Nullable="false" />
+    <Property Name="a_branch_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="a_branch_add" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="a_admin_id" Type="int" Nullable="false" />
+    <Property Name="available_cash" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="b_branch_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="b_branch_id" />
+    </Key>
+    <Property Name="b_branch_id" Type="int" Nullable="false" />
+    <Property Name="b_branch_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="b_branch_add" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="b_admin_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bank Admin">
+    <Key>
+      <PropertyRef Name="b_admin_id" />
+    </Key>
+    <Property Name="b_admin_id" Type="int" Nullable="false" />
+    <Property Name="b_admin_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="b_admin_pin" Type="int" Nullable="false" />
+    <Property Name="b_admin_rights" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dob" Type="date" Nullable="false" />
+    <Property Name="contact_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cust_add" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="a_c_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="a_c_type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bal" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="card_no" Type="varchar" MaxLength="50" />
+    <Property Name="card_pin" Type="varchar" MaxLength="4" />
+    <Property Name="b_branch_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_A_ATM_A_ADMIN_ID">
+    <End Role="A_ATM" Type="Self.A_ATM" Multiplicity="1" />
+    <End Role="ATM" Type="Self.ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ATM">
+        <PropertyRef Name="a_admin_id" />
+      </Principal>
+      <Dependent Role="ATM">
+        <PropertyRef Name="a_admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ATM_A_BRANCH_ID">
+    <End Role="ATM" Type="Self.ATM" Multiplicity="0..1" />
+    <End Role="A_ATM" Type="Self.A_ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ATM">
+        <PropertyRef Name="a_branch_id" />
+      </Principal>
+      <Dependent Role="A_ATM">
+        <PropertyRef Name="a_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Admin_B_ADMIN_ID">
+    <End Role="Bank Admin" Type="Self.Bank Admin" Multiplicity="1" />
+    <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank Admin">
+        <PropertyRef Name="b_admin_id" />
+      </Principal>
+      <Dependent Role="Bank">
+        <PropertyRef Name="b_admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BANK_B_BRANCH_ID">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="ATM" Type="Self.ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="b_branch_id" />
+      </Principal>
+      <Dependent Role="ATM">
+        <PropertyRef Name="b_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToTable">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="b_branch_id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="b_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="Insert_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Customer_name" Type="varchar" Mode="In" />
+    <Parameter Name="Customer_dob" Type="date" Mode="In" />
+    <Parameter Name="Contact_number" Type="varchar" Mode="In" />
+    <Parameter Name="Customer_address" Type="varchar" Mode="In" />
+    <Parameter Name="Account_number" Type="varchar" Mode="In" />
+    <Parameter Name="Account_type" Type="varchar" Mode="In" />
+    <Parameter Name="Branch" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="VALIDATE_ADMIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ACCOUNT" Type="varchar" Mode="In" />
+    <Parameter Name="PASSWORD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="VALIDATE_USER" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CARD_NUMBER" Type="varchar" Mode="In" />
+    <Parameter Name="PIN" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="BankModelStoreContainer">
+    <EntitySet Name="A_ATM" EntityType="Self.A_ATM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ATM" EntityType="Self.ATM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bank Admin" EntityType="Self.Bank Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_A_ATM_A_ADMIN_ID" Association="Self.FK_A_ATM_A_ADMIN_ID">
+      <End Role="A_ATM" EntitySet="A_ATM" />
+      <End Role="ATM" EntitySet="ATM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ATM_A_BRANCH_ID" Association="Self.FK_ATM_A_BRANCH_ID">
+      <End Role="ATM" EntitySet="ATM" />
+      <End Role="A_ATM" EntitySet="A_ATM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Admin_B_ADMIN_ID" Association="Self.FK_Bank_Admin_B_ADMIN_ID">
+      <End Role="Bank Admin" EntitySet="Bank Admin" />
+      <End Role="Bank" EntitySet="Bank" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BANK_B_BRANCH_ID" Association="Self.FK_BANK_B_BRANCH_ID">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="ATM" EntitySet="ATM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,72 @@
+﻿@model MVCBank.CustomerBankList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+<h2>Simulate ATM transactions</h2>
+@using (Html.BeginForm("Simulator", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <h2> Please write your card details</h2>
+        <form class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Card number", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                    @Html.TextBoxFor(m => m.Name.card_no, null, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "CARD is required" })
+                    @Html.ValidationMessageFor(m => m.Name.card_no, "", new { @class = "text - danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("PIN", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.PasswordFor(m => m.Name.card_pin, new { @class = "form-control valid text-danger", @data_val = "true", @data_val_required = "PIN is required" })
+
+                    @Html.ValidationMessageFor(m => m.Name.card_pin, "", new { @class = "text - danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("Branch", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                    @Html.DropDownListFor(m => m.Bnk.b_branch_id, new SelectList(Model.BankList, "b_branch_id", "b_branch_name"), htmlAttributes: new { @class = "btn btn-default dropdown-toggle" })
+                    
+                </div>
+            </div>
+            <div class="form-group">
+            @Html.Label("ATM", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+                 @Html.DropDownListFor(m => m.Bnk.b_branch_id, new SelectList(Model.ListATM, "a_branch_id", "a_branch_name"), htmlAttributes: new { @class = "btn btn-default dropdown-toggle" })
+               
+            </div>
+    </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-group-sm" />
+                    </div>
+                </div>
+            </form>
+                </div>
+
+
+
+
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/jqueryval")
+    if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                swal("Failed","@ViewBag.Message", "error")
+            });
+        </script>
+    }
+}

@@ -1,0 +1,50 @@
+﻿@model MVCBank.CustomerBankList
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css">
+
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+@using (Html.BeginForm("Welcome", "Simulator", FormMethod.Get))
+{
+
+    <h2 class="text-center">Welcome @Html.DisplayFor(e => e.Name.cust_name)!</h2>
+    <br />
+    <p>Your current balance is of <strong>@Html.DisplayFor(e => e.Name.Bal)</strong> lei</p>
+    <div class="list-group">
+        <ul>
+            <li class="">@Html.ActionLink("Deposit", "Deposit", "Simulator", new { cust_id = Model.Name.cust_id, branch = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-lg btn-block" })</li>
+            <br />
+            <li class="">@Html.ActionLink("Withdraw", "Withdraw", "Simulator", new { cust_id = Model.Name.cust_id, branch = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-lg btn-block" })</li>
+            <br />
+            <li class="">@Html.ActionLink("Transfer", "Transfer", "Simulator", new { cust_id = Model.Name.cust_id, branch = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-lg btn-block" })</li>
+            <br />
+            <li class="">@Html.ActionLink("Change PIN", "ChangePin", "Simulator", new { cust_id = Model.Name.cust_id, branch = Model.Bnk.b_branch_id }, new { @class = "btn btn-primary btn-lg btn-block" })</li>
+        </ul>
+    </div>
+}
+@using (Html.BeginForm("Logout", "Home", FormMethod.Post))
+{
+    <div id="logout">
+        <input type="submit" value="Exit" class="btn btn-primary"/>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    if (@ViewBag.Message != "NA")
+    {
+        <script type="text/javascript">
+            $(function () {
+                swal("Tranzaction successful!","@ViewBag.Message", "success")
+            });
+        </script>
+    }
+
+}

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankModelStoreContainer" CdmEntityContainer="BankEntities">
+    <EntitySetMapping Name="A_ATM">
+      <EntityTypeMapping TypeName="BankModel.A_ATM">
+        <MappingFragment StoreEntitySet="A_ATM">
+          <ScalarProperty Name="a_admin_id" ColumnName="a_admin_id" />
+          <ScalarProperty Name="a_admin_name" ColumnName="a_admin_name" />
+          <ScalarProperty Name="a_admin_pin" ColumnName="a_admin_pin" />
+          <ScalarProperty Name="a_admin_rights" ColumnName="a_admin_rights" />
+          <ScalarProperty Name="a_branch_id" ColumnName="a_branch_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ATMs">
+      <EntityTypeMapping TypeName="BankModel.ATM">
+        <MappingFragment StoreEntitySet="ATM">
+          <ScalarProperty Name="a_branch_id" ColumnName="a_branch_id" />
+          <ScalarProperty Name="a_branch_name" ColumnName="a_branch_name" />
+          <ScalarProperty Name="a_branch_add" ColumnName="a_branch_add" />
+          <ScalarProperty Name="a_admin_id" ColumnName="a_admin_id" />
+          <ScalarProperty Name="available_cash" ColumnName="available_cash" />
+          <ScalarProperty Name="b_branch_id" ColumnName="b_branch_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="BankModel.Bank">
+        <MappingFragment StoreEntitySet="Bank">
+          <ScalarProperty Name="b_branch_id" ColumnName="b_branch_id" />
+          <ScalarProperty Name="b_branch_name" ColumnName="b_branch_name" />
+          <ScalarProperty Name="b_branch_add" ColumnName="b_branch_add" />
+          <ScalarProperty Name="b_admin_id" ColumnName="b_admin_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bank_Admins">
+      <EntityTypeMapping TypeName="BankModel.Bank_Admin">
+        <MappingFragment StoreEntitySet="Bank Admin">
+          <ScalarProperty Name="b_admin_id" ColumnName="b_admin_id" />
+          <ScalarProperty Name="b_admin_name" ColumnName="b_admin_name" />
+          <ScalarProperty Name="b_admin_pin" ColumnName="b_admin_pin" />
+          <ScalarProperty Name="b_admin_rights" ColumnName="b_admin_rights" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="BankModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="Dob" ColumnName="Dob" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="cust_add" ColumnName="cust_add" />
+          <ScalarProperty Name="a_c_no" ColumnName="a_c_no" />
+          <ScalarProperty Name="a_c_type" ColumnName="a_c_type" />
+          <ScalarProperty Name="Bal" ColumnName="Bal" />
+          <ScalarProperty Name="card_no" ColumnName="card_no" />
+          <ScalarProperty Name="card_pin" ColumnName="card_pin" />
+          <ScalarProperty Name="b_branch_id" ColumnName="b_branch_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BankModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Insert_User" FunctionName="BankModel.Store.Insert_User" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BankModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BankModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BankModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BankModel.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BankModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BankModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BankModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="VALIDATE_ADMIN" FunctionName="BankModel.Store.VALIDATE_ADMIN" />
+    <FunctionImportMapping FunctionImportName="VALIDATE_USER" FunctionName="BankModel.Store.VALIDATE_USER" />
+    <FunctionImportMapping FunctionImportName="VALIDATE_A_ADMIN" FunctionName="BankModel.Store.VALIDATE_A_ADMIN" />
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="BankModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="debit" ColumnName="debit" />
+          <ScalarProperty Name="credit" ColumnName="credit" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="a_c_no" ColumnName="a_c_no" />
+          <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

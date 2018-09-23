@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="A_ATM">
+    <Key>
+      <PropertyRef Name="a_admin_id" />
+    </Key>
+    <Property Name="a_admin_id" Type="Int32" Nullable="false" />
+    <Property Name="a_admin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="a_admin_pin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="a_admin_rights" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="a_branch_id" Type="Int32" />
+    <NavigationProperty Name="ATMs" Relationship="Self.FK_A_ATM_A_ADMIN_ID" FromRole="A_ATM" ToRole="ATM" />
+    <NavigationProperty Name="ATM" Relationship="Self.FK_ATM_A_BRANCH_ID" FromRole="A_ATM" ToRole="ATM" />
+  </EntityType>
+  <EntityType Name="ATM">
+    <Key>
+      <PropertyRef Name="a_branch_id" />
+    </Key>
+    <Property Name="a_branch_id" Type="Int32" Nullable="false" />
+    <Property Name="a_branch_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="a_branch_add" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="a_admin_id" Type="Int32" Nullable="false" />
+    <Property Name="available_cash" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="b_branch_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="A_ATM" Relationship="Self.FK_A_ATM_A_ADMIN_ID" FromRole="ATM" ToRole="A_ATM" />
+    <NavigationProperty Name="A_ATM1" Relationship="Self.FK_ATM_A_BRANCH_ID" FromRole="ATM" ToRole="A_ATM" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_BANK_B_BRANCH_ID" FromRole="ATM" ToRole="Bank" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="b_branch_id" />
+    </Key>
+    <Property Name="b_branch_id" Type="Int32" Nullable="false" />
+    <Property Name="b_branch_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="b_branch_add" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="b_admin_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ATMs" Relationship="Self.FK_BANK_B_BRANCH_ID" FromRole="Bank" ToRole="ATM" />
+    <NavigationProperty Name="Bank_Admin" Relationship="Self.FK_Bank_Admin_B_ADMIN_ID" FromRole="Bank" ToRole="Bank_Admin" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_ToTable" FromRole="Bank" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Bank_Admin">
+    <Key>
+      <PropertyRef Name="b_admin_id" />
+    </Key>
+    <Property Name="b_admin_id" Type="Int32" Nullable="false" />
+    <Property Name="b_admin_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="b_admin_pin" Type="Int32" Nullable="false" />
+    <Property Name="b_admin_rights" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_Admin_B_ADMIN_ID" FromRole="Bank_Admin" ToRole="Bank" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="Int32" Nullable="false" />
+    <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dob" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cust_add" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="a_c_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="a_c_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bal" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="card_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="card_pin" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="b_branch_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Customers_ToTable" FromRole="Customers" ToRole="Bank" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_A_ATM_A_ADMIN_ID">
+    <End Role="A_ATM" Type="Self.A_ATM" Multiplicity="1" />
+    <End Role="ATM" Type="Self.ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="A_ATM">
+        <PropertyRef Name="a_admin_id" />
+      </Principal>
+      <Dependent Role="ATM">
+        <PropertyRef Name="a_admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ATM_A_BRANCH_ID">
+    <End Role="ATM" Type="Self.ATM" Multiplicity="0..1" />
+    <End Role="A_ATM" Type="Self.A_ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ATM">
+        <PropertyRef Name="a_branch_id" />
+      </Principal>
+      <Dependent Role="A_ATM">
+        <PropertyRef Name="a_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BANK_B_BRANCH_ID">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="ATM" Type="Self.ATM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="b_branch_id" />
+      </Principal>
+      <Dependent Role="ATM">
+        <PropertyRef Name="b_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Admin_B_ADMIN_ID">
+    <End Role="Bank_Admin" Type="Self.Bank_Admin" Multiplicity="1" />
+    <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank_Admin">
+        <PropertyRef Name="b_admin_id" />
+      </Principal>
+      <Dependent Role="Bank">
+        <PropertyRef Name="b_admin_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_ToTable">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="b_branch_id" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="b_branch_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="A_ATM" EntityType="Self.A_ATM" />
+    <EntitySet Name="ATMs" EntityType="Self.ATM" />
+    <EntitySet Name="Banks" EntityType="Self.Bank" />
+    <EntitySet Name="Bank_Admins" EntityType="Self.Bank_Admin" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_A_ATM_A_ADMIN_ID" Association="Self.FK_A_ATM_A_ADMIN_ID">
+      <End Role="A_ATM" EntitySet="A_ATM" />
+      <End Role="ATM" EntitySet="ATMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ATM_A_BRANCH_ID" Association="Self.FK_ATM_A_BRANCH_ID">
+      <End Role="ATM" EntitySet="ATMs" />
+      <End Role="A_ATM" EntitySet="A_ATM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BANK_B_BRANCH_ID" Association="Self.FK_BANK_B_BRANCH_ID">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="ATM" EntitySet="ATMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Admin_B_ADMIN_ID" Association="Self.FK_Bank_Admin_B_ADMIN_ID">
+      <End Role="Bank_Admin" EntitySet="Bank_Admins" />
+      <End Role="Bank" EntitySet="Banks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_ToTable" Association="Self.FK_Customers_ToTable">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <FunctionImport Name="Insert_User" ReturnType="Collection(Int32)">
+      <Parameter Name="Customer_name" Mode="In" Type="String" />
+      <Parameter Name="Customer_dob" Mode="In" Type="DateTime" />
+      <Parameter Name="Contact_number" Mode="In" Type="String" />
+      <Parameter Name="Customer_address" Mode="In" Type="String" />
+      <Parameter Name="Account_number" Mode="In" Type="String" />
+      <Parameter Name="Account_type" Mode="In" Type="String" />
+      <Parameter Name="Branch" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="VALIDATE_ADMIN" ReturnType="Collection(Int32)">
+      <Parameter Name="ACCOUNT" Mode="In" Type="String" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="VALIDATE_USER" ReturnType="Collection(Int32)">
+      <Parameter Name="CARD_NUMBER" Mode="In" Type="String" />
+      <Parameter Name="PIN" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
